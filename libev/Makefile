@@ -9,15 +9,16 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libev
 PKG_VERSION:=4.15
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://dist.schmorp.de/libev/Attic/
 PKG_MD5SUM:=3a73f247e790e2590c01f3492136ed31
 
 PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
 PKG_FIXUP:=autoreconf
+PKG_INSTALL:=1
+PKG_USE_MIPS16:=0
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -29,8 +30,8 @@ define Package/libev
 endef
 
 define Package/libev/description
- A full-featured and high-performance (see benchmark) event loop that is
- loosely modelled after libevent, but without its limitations and bugs.
+ A full-featured and high-performance event loop that is loosely modelled after
+ libevent, but without its limitations and bugs.
 endef
 
 TARGET_CFLAGS += $(FPIC)
@@ -40,11 +41,11 @@ CONFIGURE_ARGS += \
 	--enable-static \
 
 define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include/libev
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/libev
-	$(INSTALL_DIR) $(1)/usr/lib/libev
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{la,a,so} $(1)/usr/lib/libev
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.so.4* $(1)/usr/lib/libev
+	$(INSTALL_DIR) $(1)/usr/include
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
+	$(INSTALL_DIR) $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{la,a,so} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.so.4* $(1)/usr/lib/
 endef
 
 define Package/libev/install

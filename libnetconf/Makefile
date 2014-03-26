@@ -49,6 +49,7 @@ endef
 
 define Package/libnetconf/config
 menu "Configuration"
+	depends on PACKAGE_libnetconf
 	config LIBNETCONF_ENABLE_NOTIFICATIONS
 		bool "Enable support of NETCONF Notifications (RFC 5277)"
 		default y

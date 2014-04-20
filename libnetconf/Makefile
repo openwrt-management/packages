@@ -30,11 +30,11 @@ define Package/libnetconf
   TITLE:=NETCONF library
   URL:=$(PKG_SOURCE_URL)
   DEPENDS:= \
-	+libcurl \
 	+libssh2 \
 	+libxml2 \
 	+libxslt \
 	+zlib \
+	+LIBNETCONF_ENABLE_URL:libcurl \
 	+LIBNETCONF_ENABLE_NOTIFICATIONS:libdbus
   MAINTAINER:=Jiri Slachta <slachta@cesnet.cz>
 endef

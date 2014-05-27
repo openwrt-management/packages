@@ -37,6 +37,10 @@ CMAKE_OPTIONS = \
 
 define Package/freenetconfd/conffiles
 /etc/config/freenetconfd
+/etc/netconf/authorized_keys
+/etc/netconf/netconf_host_ecdsa_key
+/etc/netconf/netconf_host_rsa_key
+/etc/netconf/netconf_host_dsa_key
 endef
 
 define Package/freenetconfd/install

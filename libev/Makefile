@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libev
 PKG_VERSION:=4.15
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://dist.schmorp.de/libev/Attic/
@@ -41,16 +41,15 @@ CONFIGURE_ARGS += \
 	--enable-static \
 
 define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
-	$(INSTALL_DIR) $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{la,a,so} $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.so.4* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/include/libev
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/libev/
+	$(INSTALL_DIR) $(1)/usr/lib/libev
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{a,so} $(1)/usr/lib/libev/
 endef
 
 define Package/libev/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.so.4* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.so* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libev))

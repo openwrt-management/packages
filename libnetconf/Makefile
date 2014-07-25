@@ -9,8 +9,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetconf
 PKG_VERSION:=0.8.1
-PKG_RELEASE:=1
-PKG_REV:=e2656cc974d4
+PKG_REV:=f9d1be5f224d
+PKG_RELEASE:=$(PKG_REV)
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -32,10 +32,9 @@ define Package/libnetconf
   DEPENDS:= \
 	+libssh2 \
 	+libxml2 \
-	+libxslt \
 	+zlib \
-	+LIBNETCONF_ENABLE_URL:libcurl \
-	+LIBNETCONF_ENABLE_NOTIFICATIONS:libdbus
+	+LIBNETCONF_ENABLE_VALIDATION:libxslt \
+	+LIBNETCONF_ENABLE_URL:libcurl
   MAINTAINER:=Jiri Slachta <slachta@cesnet.cz>
 endef
 
@@ -62,13 +61,13 @@ menu "Configuration"
 		bool "Enable support for configuration data validation"
 		default y
 
-	config LIBNETCONF_NC_WORKING_DIR
+	config LIBNETCONF_WORKING_DIR
 		string "NETCONF working directory"
-		default /tmp/
+		default '/usr/share/libnetconf/'
 		help
 			Path to a working directory of libnetconf, where all
 			the system files are stored, the default value is
-			/tmp/
+			/usr/share/libnetconf/
 endmenu
 endef
 
@@ -79,7 +78,7 @@ CONFIGURE_ARGS+= \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS),--enable,--disable)-notifications \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_URL),--enable,--disable)-url \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_VALIDATION),--enable,--disable)-validation \
-	--with-ncworkingdirpath=$(CONFIG_LIBNETCONF_NC_WORKING_DIR)
+	--with-ncworkingdirpath=$(CONFIG_LIBNETCONF_WORKING_DIR)
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
@@ -99,7 +98,10 @@ define Package/libnetconf/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnetconf.so* $(1)/usr/lib/
 
-	$(INSTALL_DIR) $(1)$(CONFIG_LIBNETCONF_NC_WORKING_DIR)
+	$(INSTALL_DIR) $(1)$(CONFIG_LIBNETCONF_WORKING_DIR)
+
+	$(INSTALL_DIR) $(1)/usr/share/libnetconf
+	$(CP) $(PKG_INSTALL_DIR)/usr/share/libnetconf/rnglib $(1)/usr/share/libnetconf/
 endef
 
 $(eval $(call BuildPackage,libnetconf))

@@ -58,7 +58,7 @@ menu "Configuration"
 		default y
 
 	config LIBNETCONF_ENABLE_VALIDATION
-		bool "Enable support for configuration data validation"
+		bool "Enable support for configuration data validation (RFC 6241)"
 		default y
 
 	config LIBNETCONF_WORKING_DIR

@@ -9,8 +9,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetconf
 PKG_VERSION:=0.8.1
+PKG_RELEASE:=3
 PKG_REV:=f9d1be5f224d
-PKG_RELEASE:=$(PKG_REV)
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -30,11 +30,11 @@ define Package/libnetconf
   TITLE:=NETCONF library
   URL:=$(PKG_SOURCE_URL)
   DEPENDS:= \
-	+libssh2 \
 	+libxml2 \
 	+zlib \
 	+LIBNETCONF_ENABLE_VALIDATION:libxslt \
-	+LIBNETCONF_ENABLE_URL:libcurl
+	+LIBNETCONF_ENABLE_URL:libcurl \
+	+LIBNETCONF_USE_LIBSSH2:libssh2
   MAINTAINER:=Jiri Slachta <slachta@cesnet.cz>
 endef
 
@@ -61,6 +61,13 @@ menu "Configuration"
 		bool "Enable support for configuration data validation (RFC 6241)"
 		default y
 
+	config LIBNETCONF_USE_LIBSSH2
+		bool "Use libssh2 library for SSH transport."
+		default y
+		help
+			If this config is selected, the libssh2 library is used
+			for SSH transport. Otherwise the system SSH client is used.
+
 	config LIBNETCONF_WORKING_DIR
 		string "NETCONF working directory"
 		default '/usr/share/libnetconf/'
@@ -74,7 +81,7 @@ endef
 CONFIGURE_ARGS+= \
 	--prefix=/usr/ \
 	--exec-prefix=/usr/ \
-	--enable-libssh2 \
+	$(if $(CONFIG_LIBNETCONF_USE_LIBSSH2)--enable,--disable)-libssh2 \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS),--enable,--disable)-notifications \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_URL),--enable,--disable)-url \
 	$(if $(CONFIG_LIBNETCONF_ENABLE_VALIDATION),--enable,--disable)-validation \

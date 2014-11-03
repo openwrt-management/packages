@@ -17,6 +17,7 @@ PKG_SOURCE_URL:=http://shflags.googlecode.com/svn/trunk
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_LICENSE:=LGPL-2.1
 
 include $(INCLUDE_DIR)/package.mk
 

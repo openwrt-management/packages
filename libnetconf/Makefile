@@ -8,9 +8,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetconf
-PKG_VERSION:=0.8.1
-PKG_RELEASE:=3
-PKG_REV:=f9d1be5f224d
+PKG_VERSION:=0.9.0
+PKG_RELEASE:=1
+PKG_REV:=ba1a489df35c
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -48,44 +48,17 @@ define Package/libnetconf/description
 endef
 
 define Package/libnetconf/config
-menu "Configuration"
-	depends on PACKAGE_libnetconf
-	config LIBNETCONF_ENABLE_NOTIFICATIONS
-		bool "Enable support of NETCONF Notifications (RFC 5277)"
-		default y
-
-	config LIBNETCONF_ENABLE_URL
-		bool "Enable support of NETCONF URL Capability (RFC 6241)"
-		default y
-
-	config LIBNETCONF_ENABLE_VALIDATION
-		bool "Enable support for configuration data validation (RFC 6241)"
-		default y
-
-	config LIBNETCONF_USE_LIBSSH2
-		bool "Use libssh2 library for SSH transport."
-		default y
-		help
-			If this config is selected, the libssh2 library is used
-			for SSH transport. Otherwise the system SSH client is used.
-
-	config LIBNETCONF_WORKING_DIR
-		string "NETCONF working directory"
-		default '/usr/share/libnetconf/'
-		help
-			Path to a working directory of libnetconf, where all
-			the system files are stored, the default value is
-			/usr/share/libnetconf/
-endmenu
+  source "$(SOURCE)/Config.in"
 endef
 
-CONFIGURE_ARGS+= \
+CONFIGURE_ARGS+=\
 	--prefix=/usr/ \
 	--exec-prefix=/usr/ \
-	$(if $(CONFIG_LIBNETCONF_USE_LIBSSH2)--enable,--disable)-libssh2 \
-	$(if $(CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS),--enable,--disable)-notifications \
-	$(if $(CONFIG_LIBNETCONF_ENABLE_URL),--enable,--disable)-url \
-	$(if $(CONFIG_LIBNETCONF_ENABLE_VALIDATION),--enable,--disable)-validation \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_USE_LIBSSH2,libssh2) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS,notifications) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_URL,url) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_VALIDATION,validation) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_YANG_SCHEMAS,yang-schemas) \
 	--with-ncworkingdirpath=$(CONFIG_LIBNETCONF_WORKING_DIR)
 
 define Build/InstallDev

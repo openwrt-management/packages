@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 OpenWrt.org
+# Copyright (C) 2014-2015 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -8,15 +8,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=freenetconfd
-PKG_VERSION:=2014-07-10
+PKG_VERSION:=2015-02-05
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://dev.freenetconf.org/freenetconfd
-PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=e2ab83cd0f7610f31d6101d645da7ea5640a132c
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_LICENSE:=GPL-2.0+
+PKG_MAINTAINER:=Luka Perkov <luka@openwrt.org>
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/freenetconf/freenetconfd.git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_VERSION:=1b72de4d3fe7dd98a6ebdedecad080fe4ae1c07c
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
@@ -29,19 +31,21 @@ define Package/freenetconfd
   CATEGORY:=Utilities
   TITLE:=netconf server
   URL:=http://www.freenetconf.org/
-  DEPENDS:=+libuci +libubox +libubus +libssh +libroxml
-  MAINTAINER:=Luka Perkov <luka@openwrt.org>
+  DEPENDS:=+libuci +libubox +libubus +libroxml
 endef
 
 CMAKE_OPTIONS = \
-	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_PREFIX=/ \
 
 define Package/freenetconfd/conffiles
 /etc/config/freenetconfd
-/etc/netconf/authorized_keys
-/etc/netconf/netconf_host_ecdsa_key
-/etc/netconf/netconf_host_rsa_key
-/etc/netconf/netconf_host_dsa_key
+endef
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/include/freenetconfd
+	$(CP) \
+		$(PKG_INSTALL_DIR)/usr/include/freenetconfd \
+		$(1)/usr/include
 endef
 
 define Package/freenetconfd/install

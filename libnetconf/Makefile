@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 OpenWrt.org
+# Copyright (C) 2015 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -8,9 +8,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetconf
-PKG_VERSION:=0.9.0
+PKG_VERSION:=0.9.1
 PKG_RELEASE:=1
-PKG_REV:=ba1a489df35c
+PKG_REV:=6558573a8f0b
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -54,12 +54,14 @@ endef
 CONFIGURE_ARGS+=\
 	--prefix=/usr/ \
 	--exec-prefix=/usr/ \
+	--without-dnssec \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_USE_LIBSSH2,libssh2) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS,notifications) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_TLS,tls) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_URL,url) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_VALIDATION,validation) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_YANG_SCHEMAS,yang-schemas) \
-	--with-ncworkingdirpath=$(CONFIG_LIBNETCONF_WORKING_DIR)
+	--with-workingdir=$(CONFIG_LIBNETCONF_WORKING_DIR)
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include

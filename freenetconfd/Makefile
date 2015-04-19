@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=freenetconfd
-PKG_VERSION:=2015-02-05
+PKG_VERSION:=2015-10-25
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_LICENSE:=GPL-2.0+
@@ -17,7 +17,7 @@ PKG_MAINTAINER:=Luka Perkov <luka@openwrt.org>
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/freenetconf/freenetconfd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=1b72de4d3fe7dd98a6ebdedecad080fe4ae1c07c
+PKG_SOURCE_VERSION:=933edfbb68062f14c0ae20b52fe5ecd372c7569d
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
@@ -63,6 +63,8 @@ define Package/freenetconfd/install
 	$(INSTALL_BIN) \
 		./files/freenetconfd.init \
 		$(1)/etc/init.d/freenetconfd
+
+	$(INSTALL_DIR) $(1)/usr/lib/freenetconfd/
 endef
 
 $(eval $(call BuildPackage,freenetconfd))

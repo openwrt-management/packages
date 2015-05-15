@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 OpenWrt.org
+# Copyright (C) 2014-2015 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libev
-PKG_VERSION:=4.15
-PKG_RELEASE:=3
+PKG_VERSION:=4.19
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://dist.schmorp.de/libev/Attic/
-PKG_MD5SUM:=3a73f247e790e2590c01f3492136ed31
+PKG_MD5SUM:=01d1c672697f649b4f94abd0b70584ff
 PKG_LICENSE:=BSD-2-Clause
 
 PKG_BUILD_PARALLEL:=1
@@ -45,7 +45,7 @@ define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/libev
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/libev/
 	$(INSTALL_DIR) $(1)/usr/lib/libev
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{a,so} $(1)/usr/lib/libev/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libev.{a,so*} $(1)/usr/lib/libev/
 endef
 
 define Package/libev/install

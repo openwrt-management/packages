@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libyang
-PKG_VERSION:=0.3.4
+PKG_VERSION:=0.4.6
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_LICENSE:=GPL-2.0+
@@ -17,7 +17,7 @@ PKG_MAINTAINER:=Luka Perkov <luka@openwrt.org>
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/CESNET/libyang.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=952489bbc94c83e23afdd4a396114996efdc5c9a
+PKG_SOURCE_VERSION:=fcd305267837985c718890931433f35b4ffca567
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
@@ -42,25 +42,24 @@ define Package/yanglint
   DEPENDS:=+libyang
 endef
 
-CMAKE_OPTIONS = \
-	-DCMAKE_INSTALL_PREFIX=/
+TARGET_LDFLAGS += -lm
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
-		$(PKG_INSTALL_DIR)/lib/libyang.so* \
+		$(PKG_INSTALL_DIR)/usr/lib/libyang.so* \
 		$(1)/usr/lib/
 
 	$(INSTALL_DIR) $(1)/usr/include/libyang
 	$(CP) \
-		$(PKG_INSTALL_DIR)/include/libyang/* \
+		$(PKG_INSTALL_DIR)/usr/include/libyang/* \
 		$(1)/usr/include/libyang/
 endef
 
 define Package/libyang/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
-		$(PKG_INSTALL_DIR)/lib/libyang.so* \
+		$(PKG_INSTALL_DIR)/usr/lib/libyang.so* \
 		$(1)/usr/lib/
 endef
 

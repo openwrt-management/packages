@@ -1,0 +1,64 @@
+From 524c9a84400019e092a0cdc65e472b2fc7c7ef67 Mon Sep 17 00:00:00 2001
+From: Mislav Novakovic <mislav.novakovic@sartura.hr>
+Date: Thu, 10 Dec 2015 21:18:11 +0100
+Subject: [PATCH] add missing includes and defines
+
+Signed-off-by: Mislav Novakovic <mislav.novakovic@sartura.hr>
+---
+ src/common.c      | 1 +
+ src/libyang.h     | 1 +
+ src/printer_xml.c | 1 +
+ src/xml.h         | 1 +
+ 4 files changed, 4 insertions(+)
+
+diff --git a/src/common.c b/src/common.c
+index 4dfe867..932a03e 100644
+--- a/src/common.c
++++ b/src/common.c
+@@ -18,6 +18,7 @@
+  *    may be used to endorse or promote products derived from this
+  *    software without specific prior written permission.
+  */
++#define _GNU_SOURCE
+ 
+ #include <assert.h>
+ #include <stdlib.h>
+diff --git a/src/libyang.h b/src/libyang.h
+index a7a986a..f96e925 100644
+--- a/src/libyang.h
++++ b/src/libyang.h
+@@ -23,6 +23,7 @@
+ #define LY_LIBYANG_H_
+ 
+ #include <stdio.h>
++#include <unistd.h>
+ 
+ #include "tree_schema.h"
+ #include "tree_data.h"
+diff --git a/src/printer_xml.c b/src/printer_xml.c
+index dc701fc..6b3081f 100644
+--- a/src/printer_xml.c
++++ b/src/printer_xml.c
+@@ -19,6 +19,7 @@
+  *    may be used to endorse or promote products derived from this
+  *    software without specific prior written permission.
+  */
++#define _GNU_SOURCE
+ #define _XOPEN_SOURCE 700
+ 
+ #include <stdlib.h>
+diff --git a/src/xml.h b/src/xml.h
+index 4a52de1..7ebd373 100644
+--- a/src/xml.h
++++ b/src/xml.h
+@@ -23,6 +23,7 @@
+ #define LY_XML_H_
+ 
+ #include <stdio.h>
++#include <unistd.h>
+ 
+ /**
+  * @defgroup xmlparser XML Parser
+-- 
+2.6.2
+

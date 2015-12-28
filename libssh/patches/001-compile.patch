@@ -13,7 +13,7 @@
      find_package(ZLIB REQUIRED)
 --- a/ConfigureChecks.cmake
 +++ b/ConfigureChecks.cmake
-@@ -4,7 +4,6 @@ include(CheckFunctionExists)
+@@ -5,7 +5,6 @@ include(CheckFunctionExists)
  include(CheckLibraryExists)
  include(CheckTypeSize)
  include(CheckCXXSourceCompiles)
@@ -21,7 +21,7 @@
  
  set(PACKAGE ${APPLICATION_NAME})
  set(VERSION ${APPLICATION_VERSION})
-@@ -215,6 +214,8 @@ if (WITH_GSSAPI AND NOT GSSAPI_FOUND)
+@@ -270,6 +269,8 @@ if (WITH_GSSAPI AND NOT GSSAPI_FOUND)
  endif (WITH_GSSAPI AND NOT GSSAPI_FOUND)
  
  # ENDIAN

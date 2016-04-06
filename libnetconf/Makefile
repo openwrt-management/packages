@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnetconf
-PKG_VERSION:=0.9.1
+PKG_VERSION:=0.10.0
 PKG_RELEASE:=1
-PKG_REV:=6558573a8f0b
+PKG_REV:=414c7e2293bd6c3108e895f111a1ab5614545ce2
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://code.google.com/p/libnetconf/
+PKG_SOURCE_URL:=https://github.com/cesnet/libnetconf
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=$(PKG_REV)
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)
@@ -33,9 +33,10 @@ define Package/libnetconf
   DEPENDS:= \
 	+libxml2 \
 	+zlib \
+	+LIBNETCONF_ENABLE_TLS:libopenssl \
 	+LIBNETCONF_ENABLE_VALIDATION:libxslt \
 	+LIBNETCONF_ENABLE_URL:libcurl \
-	+LIBNETCONF_USE_LIBSSH2:libssh2
+	+LIBNETCONF_USE_LIBSSH:libssh
   MAINTAINER:=Jiri Slachta <slachta@cesnet.cz>
 endef
 
@@ -43,7 +44,7 @@ define Package/libnetconf/description
  libnetconf is the NETCONF library in C intended for building NETCONF clients and servers.
 
  libnetconf provides basic functions to connect NETCONF client and server to each other via
- SSH, to send and receive NETCONF messages and to store and work with the configuration data 
+ SSH, to send and receive NETCONF messages and to store and work with the configuration data
  in a datastore.
 endef
 
@@ -55,13 +56,16 @@ CONFIGURE_ARGS+=\
 	--prefix=/usr/ \
 	--exec-prefix=/usr/ \
 	--without-dnssec \
-	$(call autoconf_bool,CONFIG_LIBNETCONF_USE_LIBSSH2,libssh2) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_USE_LIBSSH,libssh) \
+	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_DNSSEC,dnssec) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_NOTIFICATIONS,notifications) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_TLS,tls) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_URL,url) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_VALIDATION,validation) \
 	$(call autoconf_bool,CONFIG_LIBNETCONF_ENABLE_YANG_SCHEMAS,yang-schemas) \
 	--with-workingdir=$(CONFIG_LIBNETCONF_WORKING_DIR)
+
+#TODO pyapi
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include

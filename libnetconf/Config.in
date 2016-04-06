@@ -1,8 +1,13 @@
 menu "Configuration"
 	depends on PACKAGE_libnetconf
         
+	config LIBNETCONF_ENABLE_DNSSEC
+		bool "Enable support for SSHFP retrieval using DNSSEC for SSH"
+		depends @BROKEN
+		default n
+
 	config LIBNETCONF_ENABLE_NOTIFICATIONS
-		bool "Enable support of NETCONF Notifications (RFC 5277)"
+		bool "Enable support for NETCONF Notifications (RFC 5277)"
 		default y
 
         config LIBNETCONF_ENABLE_TLS
@@ -21,11 +26,11 @@ menu "Configuration"
 		bool "Enable support for YANG format in <get-schema> operation"
 		default y
 
-	config LIBNETCONF_USE_LIBSSH2
-		bool "Use libssh2 library for SSH transport"
+	config LIBNETCONF_USE_LIBSSH
+		bool "Use libssh library for SSH transport"
 		default y
 		help
-			If this config is selected, the libssh2 library is 
+			If this config is selected, the libssh library is 
 			used for SSH transport. Otherwise the system SSH 
 			client is used.
 

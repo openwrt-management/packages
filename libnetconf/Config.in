@@ -3,7 +3,7 @@ menu "Configuration"
         
 	config LIBNETCONF_ENABLE_DNSSEC
 		bool "Enable support for SSHFP retrieval using DNSSEC for SSH"
-		depends @BROKEN
+		depends on @BROKEN
 		default n
 
 	config LIBNETCONF_ENABLE_NOTIFICATIONS

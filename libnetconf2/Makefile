@@ -73,4 +73,3 @@ define Package/libnetconf2/install
 endef
 
 $(eval $(call BuildPackage,libnetconf2))
-

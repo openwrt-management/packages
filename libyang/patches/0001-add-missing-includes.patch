@@ -1,0 +1,30 @@
+commit d7c5a6945d31f061f2a03351eeba9060e91d0aa5
+Author: Peter Nagy <xnagyp01@stud.fit.vutbr.cz>
+Date:   Tue May 3 10:36:20 2016 +0200
+
+    [PATCH] add missing includes
+
+diff --git a/src/libyang.h b/src/libyang.h
+index bcfa3e3..2f4613f 100644
+--- a/src/libyang.h
++++ b/src/libyang.h
+@@ -16,6 +16,7 @@
+ #define LY_LIBYANG_H_
+ 
+ #include <stdio.h>
++#include <unistd.h>
+ 
+ #include "tree_schema.h"
+ #include "tree_data.h"
+diff --git a/src/xml.h b/src/xml.h
+index a7e764b..583e3f0 100644
+--- a/src/xml.h
++++ b/src/xml.h
+@@ -17,6 +17,7 @@
+ 
+ #include <sys/types.h>
+ #include <stdio.h>
++#include <unistd.h>
+ 
+ /**
+  * @defgroup xmlparser XML Parser

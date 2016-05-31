@@ -37,7 +37,7 @@ define Package/libnetconf
 	+LIBNETCONF_ENABLE_VALIDATION:libxslt \
 	+LIBNETCONF_ENABLE_URL:libcurl \
 	+LIBNETCONF_USE_LIBSSH:libssh
-  MAINTAINER:=Jiri Slachta <slachta@cesnet.cz>
+  MAINTAINER:=Jiri Slachta <jiri@slachta.eu>
 endef
 
 define Package/libnetconf/description

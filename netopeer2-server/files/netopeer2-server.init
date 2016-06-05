@@ -1,0 +1,26 @@
+#
+# Copyright (C) 2016 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
+#!/bin/sh /etc/rc.common
+
+START=90
+STOP=10
+
+USE_PROCD=1
+PROG=/bin/netopeer2-server
+
+start_service() {
+    procd_open_instance
+    procd_set_param command $PROG
+    procd_set_param respawn
+    procd_close_instance
+}
+
+stop_service()
+{
+    service_stop ${PROG}
+}

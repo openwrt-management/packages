@@ -13,10 +13,10 @@ PKG_LICENSE:=BSD-3-Clause
 PKG_MAINTAINER:=Mislav Novakovic <mislav.novakovic@sartura.hr>
 
 PKG_NAME:=netopeer2-server
-PKG_VERSION:=2016-06-03-1
+PKG_VERSION:=0.2.23
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_VERSION:=7062c5d6ae2015586990bf9e8cf34eff4a38685d
+PKG_SOURCE_VERSION:=8338ec44f8a4f15128cde979323200952f161fee
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/CESNET/Netopeer2.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_SOURCE_VERSION)
@@ -48,13 +48,12 @@ define Package/netopeer2-server/install
 
 	$(INSTALL_DIR) $(1)/etc/init.d/
 	$(INSTALL_BIN) ./files/netopeer2-server.init $(1)/etc/init.d/netopeer2-server
-endef
 
-define Package/netopeer2-server/postinst
-#!/bin/sh
-cp $(PKG_BUILD_DIR)/modules/*.yang $${IPKG_INSTROOT}/etc/sysrepo/yang/
-cp $(PKG_BUILD_DIR)/modules/*.yin $${IPKG_INSTROOT}/etc/sysrepo/yang/
-exit 0
+	$(INSTALL_DIR) $(1)/etc/sysrepo/yang
+	$(INSTALL_CONF) $(PKG_BUILD_DIR)/modules/ietf-netconf-acm.yang $(1)/etc/sysrepo/yang
+
+	$(INSTALL_DIR) $(1)/etc/sysrepo/yang
+	$(INSTALL_CONF) $(PKG_BUILD_DIR)/modules/ietf-netconf@2011-06-01.yang $(1)/etc/sysrepo/yang
 endef
 
 $(eval $(call BuildPackage,netopeer2-server))

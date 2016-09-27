@@ -1,0 +1,28 @@
+From f1d65b1eeed0610982d761b30f6c34850306557c Mon Sep 17 00:00:00 2001
+From: Mislav Novakovic <mislav.novakovic@sartura.hr>
+Date: Tue, 27 Sep 2016 17:26:50 +0200
+Subject: [PATCH] fix: execinfo.h: No such file or directory
+
+Signed-off-by: Mislav Novakovic <mislav.novakovic@sartura.hr>
+---
+ server/main.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/server/main.c b/server/main.c
+index 9e0d086..d7d9190 100644
+--- a/server/main.c
++++ b/server/main.c
+@@ -13,7 +13,9 @@
+  */
+ 
+ #include <errno.h>
+-#include <execinfo.h>
++#ifdef DEBUG
++    #include <execinfo.h>
++#endif
+ #include <fcntl.h>
+ #include <pthread.h>
+ #include <signal.h>
+-- 
+2.10.0
+

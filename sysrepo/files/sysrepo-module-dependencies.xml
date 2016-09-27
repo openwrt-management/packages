@@ -1,0 +1,9 @@
+<module xmlns="urn:ietf:params:xml:ns:yang:sysrepo-module-dependencies">
+  <name>sysrepo-module-dependencies</name>
+  <revision>2016-06-14</revision>
+  <prefix>srmd</prefix>
+  <namespace>urn:ietf:params:xml:ns:yang:sysrepo-module-dependencies</namespace>
+  <filepath>/etc/sysrepo/yang/sysrepo-module-dependencies@2016-06-14.yang</filepath>
+  <latest-revision>true</latest-revision>
+  <submodule>false</submodule>
+</module>

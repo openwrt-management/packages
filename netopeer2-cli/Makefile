@@ -13,10 +13,10 @@ PKG_LICENSE:=BSD-3-Clause
 PKG_MAINTAINER:=Mislav Novakovic <mislav.novakovic@sartura.hr>
 
 PKG_NAME:=netopeer2-cli
-PKG_VERSION:=2.0.27
+PKG_VERSION:=0.2.33
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_VERSION:=29eb442f4a85a3249ab59cd48c28f9efa167b0bc
+PKG_SOURCE_VERSION:=db79cb2cdf1d50078b5095d1ab01a4097f1a3f28
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/CESNET/Netopeer2.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_SOURCE_VERSION)
@@ -33,7 +33,7 @@ define Package/netopeer2-cli
   SECTION:=util
   CATEGORY:=Utilities
   DEPENDS:=+libyang +libnetconf2 +openssl
-  TITLE:=Netopeer2 cli
+  TITLE:=Netopeer2 cli tool
 endef
 
 CMAKE_OPTIONS += \

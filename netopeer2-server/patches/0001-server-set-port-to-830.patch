@@ -1,0 +1,21 @@
+From 2a819c46601e614f75757de53e879d7bb59cd671 Mon Sep 17 00:00:00 2001
+From: Mislav Novakovic <mislav.novakovic@sartura.hr>
+Date: Tue, 3 Jan 2017 17:45:18 +0000
+Subject: [PATCH] server: set port to 830
+
+Signed-off-by: Mislav Novakovic <mislav.novakovic@sartura.hr>
+---
+ server/main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/server/main.c
++++ b/server/main.c
+@@ -336,7 +336,7 @@ server_init(void)
+         if (nc_server_ssh_endpt_set_address("main", "0.0.0.0")) {
+             goto error;
+         }
+-        if (nc_server_ssh_endpt_set_port("main", 6001)) {
++        if (nc_server_ssh_endpt_set_port("main", 830)) {
+             goto error;
+         }
+         if (nc_server_ssh_endpt_add_hostkey("main", NP2SRV_HOST_KEY)) {

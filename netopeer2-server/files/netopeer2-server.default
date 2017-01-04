@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -x /bin/sysrepoctl ]; then
+	sysrepoctl --init --search-dir=/etc/sysrepo/yang --m ietf-netconf
+	sysrepoctl --init --search-dir=/etc/sysrepo/yang --m ietf-netconf-acm
+	sysrepoctl --init --search-dir=/etc/sysrepo/yang --m ietf-netconf-monitoring
+	sysrepoctl --init --search-dir=/etc/sysrepo/yang --m ietf-netconf-with-defaults
+fi
+
+exit 0

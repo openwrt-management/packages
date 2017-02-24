@@ -32,7 +32,7 @@ include $(INCLUDE_DIR)/cmake.mk
 define Package/netopeer2-server
   SECTION:=util
   CATEGORY:=Utilities
-  DEPENDS:=+sysrepod +sysrepoctl +sysrepocfg +libnetconf2 +openssl
+  DEPENDS:=+sysrepod +sysrepoctl +sysrepocfg +libnetconf2 +libopenssl
   TITLE:=NETCONF server
 endef
 

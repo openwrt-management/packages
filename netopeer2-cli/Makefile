@@ -32,7 +32,7 @@ include $(INCLUDE_DIR)/cmake.mk
 define Package/netopeer2-cli
   SECTION:=util
   CATEGORY:=Utilities
-  DEPENDS:=+libyang +libnetconf2 +openssl
+  DEPENDS:=+libyang +libnetconf2 +libopenssl
   TITLE:=Netopeer2 cli tool
 endef
 
